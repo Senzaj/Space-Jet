@@ -3,10 +3,15 @@ using UnityEngine;
 public class SpaceFighterShooting : MonoBehaviour
 {
     [SerializeField] private Transform _shootPoint;
-    [SerializeField] private GameObject _torpedoTemplate;
     [SerializeField] private float _shootCooldown;
-
+    
+    private ObjectPool _torpedoPool;
     private float _passedTime;
+
+    private void Start()
+    {
+        _torpedoPool = GetComponentInChildren<ObjectPool>();
+    }
 
     private void Update()
     {
@@ -21,6 +26,6 @@ public class SpaceFighterShooting : MonoBehaviour
 
     private void Shoot()
     {
-        Instantiate(_torpedoTemplate, _shootPoint.position, Quaternion.identity, transform);
+        _torpedoPool.Spawn(_shootPoint.position);
     }
 }

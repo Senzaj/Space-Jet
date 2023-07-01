@@ -1,8 +1,6 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Collider))]
-[RequireComponent(typeof(MeshRenderer))]
 public class Torpedo : MonoBehaviour
 {
     [SerializeField] private float _speed;
@@ -12,14 +10,11 @@ public class Torpedo : MonoBehaviour
     public int Damage => _damage;
 
     private Rigidbody _rigidbody;
-    private Collider _collider;
-    private MeshRenderer _meshRenderer;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _meshRenderer = GetComponent<MeshRenderer>();
-        _collider = GetComponent<Collider>();
+        _rigidbody.freezeRotation = true;
     }
     void Update()
     {
@@ -28,9 +23,7 @@ public class Torpedo : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        _meshRenderer.enabled = false;
-        _collider.enabled = false;
-        Instantiate(_explosion.gameObject, transform.position, Quaternion.identity, transform);
+        Instantiate(_explosion.gameObject, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
     }
 }

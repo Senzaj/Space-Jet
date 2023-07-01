@@ -13,6 +13,6 @@ public class Explosion : MonoBehaviour
     private void Update()
     {
         if (_exlosion.isStopped)
-            gameObject.SetActive(false);
+            Destroy(gameObject);
     }
 }

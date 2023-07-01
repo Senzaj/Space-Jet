@@ -42,16 +42,20 @@ public class StationBlock : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out Torpedo torpedo))
         {
             foreach (ContactPoint contact in collision.contacts)
+            {
                 Instantiate(_fire.gameObject, contact.point, Quaternion.identity, transform);
+                break;
+            }
 
             _currentHP -= torpedo.Damage;
-            IsBlockReadyToBeDestoyed();
+            _currentHP = Mathf.Clamp(_currentHP, 0, _maxHP);
+            TryToBeDestroyed();
         }
     }
 
-    private void IsBlockReadyToBeDestoyed()
+    private void TryToBeDestroyed()
     {
-        if (_currentHP <= 0)
+        if (_currentHP == 0)
         {
             foreach(EnergyShield shield in _energyShields)
             {
@@ -70,8 +74,6 @@ public class StationBlock : MonoBehaviour
         int turnedOnShieldsCount = Random.Range(_station.MinShieldCount, _station.MaxShieldCount);
 
         for (int i = 0; i < turnedOnShieldsCount; i++)
-        {
             _energyShields[i].gameObject.SetActive(true);
-        }
     }
 }
