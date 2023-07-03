@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool : MonoBehaviour
+public abstract class ObjectPool : MonoBehaviour
 {
     [SerializeField] private GameObject _template;
     [SerializeField] private int _poolCapacity;
@@ -20,7 +20,7 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    public void Spawn(Vector3 spawnPoint)
+    public GameObject Spawn(Vector3 spawnPoint)
     {
         foreach (GameObject obj in _pool)
         {
@@ -29,8 +29,10 @@ public class ObjectPool : MonoBehaviour
                 obj.transform.position = spawnPoint;
                 obj.transform.rotation = Quaternion.identity;
                 obj.SetActive(true);
-                break;
+                return obj;
             }
         }
+
+        return null;
     }
 }

@@ -28,7 +28,6 @@ public class LevelFailedPanel : Panel
     {
         LevelButton Level = _restartLevelButton.GetComponent<LevelButton>();
         Level.SetLevelData(data);
-
         TurnOn();
     }
 

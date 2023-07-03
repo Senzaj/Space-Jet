@@ -7,7 +7,7 @@ public class EnergyShield : MonoBehaviour
 
     private void Start()
     {
-        _blastPool = FindObjectOfType<ObjectPool>();
+        _blastPool = FindObjectOfType<BlastPool>();
     }
 
     public void TurnOff(float speed)

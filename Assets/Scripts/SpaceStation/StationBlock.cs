@@ -11,14 +11,14 @@ public class StationBlock : MonoBehaviour
     [SerializeField] private float _getAwaySpeed;
     [SerializeField] private ParticleSystem _fire;
 
-    public event UnityAction Destroyed;
+    public event UnityAction<StationBlock> Destroyed;
 
     private int _currentHP;
     private List<EnergyShield> _energyShields;
     private SpaceStation _station;
     private Transform _destroyerPosition;
 
-    private void Start()
+    private void OnEnable()
     {
         _destroyerPosition = FindFirstObjectByType<Destroyer>().transform;
         _station = FindFirstObjectByType<SpaceStation>();
@@ -64,7 +64,7 @@ public class StationBlock : MonoBehaviour
             }
 
             transform.DOMove(_destroyerPosition.position - transform.position, _getAwaySpeed);
-            Destroyed?.Invoke();
+            Destroyed?.Invoke(this);
         }
     }
 

@@ -6,6 +6,7 @@ public class LevelControl : MonoBehaviour
     [SerializeField] private GameObject _content;
     [SerializeField] private SpaceStation _station;
     [SerializeField] private Player _player;
+    [SerializeField] private InGamePanel _gamePanel;
     [SerializeField] private LevelButton _nextLevelButton;
     [SerializeField] private LevelButton _restartLevelButton;
 
@@ -43,15 +44,18 @@ public class LevelControl : MonoBehaviour
         _currentLevel = data;
         _station.SetParams(data.StationBlocksCount , data.MinShieldsCount, data.MaxShieldsCount);
         LevelStarted?.Invoke();
+        _gamePanel.TurnOn();
     }
 
     private void OnPlayerWon( bool isPlayerDamaged)
     {
         LevelComplete?.Invoke(_currentLevel, isPlayerDamaged);
+        _gamePanel.TurnOff();
     }
 
     private void OnPlayerLost()
     {
         LevelFailed?.Invoke(_currentLevel);
+        _gamePanel.TurnOff();
     }
 }

@@ -9,8 +9,11 @@ public class Player : MonoBehaviour
     [SerializeField] private ParticleSystem _breakdown;
     [SerializeField] private LevelControl _levelControl;
 
+    public int MaxHP => _maxHP;
+
     public event UnityAction Lost;
     public event UnityAction<bool> Won;
+    public event UnityAction<int> HealthChanged;
 
     private int _currentHP;
     private SpaceFighterMover _mover;
@@ -27,7 +30,6 @@ public class Player : MonoBehaviour
         _station.Destroyed += OnStationDestroyed;
 
         _shooting.enabled = false;
-
     }
 
     private void OnDisable()
@@ -40,6 +42,7 @@ public class Player : MonoBehaviour
         _currentHP -= damage;
         _isDamaged = true;
         _currentHP = Mathf.Clamp(_currentHP, 0, _maxHP);
+        HealthChanged.Invoke(_currentHP);
         _breakdown.Play();
         TryEscape();
     }
@@ -58,6 +61,7 @@ public class Player : MonoBehaviour
     {
         _mover.GoToStartPosition();
         _currentHP = _maxHP;
+        HealthChanged.Invoke(_currentHP);
         _isDamaged = false;
         _shooting.enabled = true;
     }

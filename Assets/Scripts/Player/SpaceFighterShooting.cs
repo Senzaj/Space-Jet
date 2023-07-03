@@ -10,7 +10,7 @@ public class SpaceFighterShooting : MonoBehaviour
 
     private void Start()
     {
-        _torpedoPool = GetComponentInChildren<ObjectPool>();
+        _torpedoPool = GetComponentInChildren<TorpedoPool>();
     }
 
     private void Update()

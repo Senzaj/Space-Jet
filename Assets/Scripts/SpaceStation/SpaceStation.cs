@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
+using Unity.VisualScripting;
 
 public class SpaceStation : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class SpaceStation : MonoBehaviour
     private Vector3 _spawnPosition;
     private List<StationBlock> _blocks;
     private int _currentBlocksCount;
+    private float _maxRotationSpeed;
 
     private void Update()
     {
@@ -39,6 +41,7 @@ public class SpaceStation : MonoBehaviour
         transform.position = _stationEnd.position;
         _levelControl.LevelStarted += Spawn;
         _player.Lost += GoEndPosition;
+        _maxRotationSpeed = _rotationSpeed;
     }
 
     private void OnDisable()
@@ -48,6 +51,16 @@ public class SpaceStation : MonoBehaviour
 
         foreach (StationBlock block in _blocks)
             block.Destroyed -= Move;
+    }
+
+    public void StopRotation()
+    {
+        _rotationSpeed = 0;
+    }
+
+    public void ContinueRotation()
+    {
+        _rotationSpeed = _maxRotationSpeed;
     }
 
     public void SetParams(int blocksCount, int minShields, int maxShields)
@@ -60,7 +73,7 @@ public class SpaceStation : MonoBehaviour
     private void Spawn()
     {
         if (_blocks != null)
-            DisableBlocks();
+            DestroyBlocks();
         _blocks = new List<StationBlock>();
         transform.position = _stationEnd.position;
         _spawnPosition = transform.position;
@@ -75,7 +88,7 @@ public class SpaceStation : MonoBehaviour
             _blocks.Add(spawnedBlock);
         }
 
-        _currentBlocksCount = _blocks.Count;
+        _currentBlocksCount = _blocksCount;
         GoStartPosition();
     }
 
@@ -87,7 +100,6 @@ public class SpaceStation : MonoBehaviour
     private void GoEndPosition()
     {
         transform.DOMove(_stationEnd.position, _appearingAndDisappearingSpeed);
-        DestroyBlocks(_appearingAndDisappearingSpeed);
     }
 
     private void Rotate()
@@ -95,29 +107,23 @@ public class SpaceStation : MonoBehaviour
         transform.Rotate(_rotationSpeed, 0, 0);
     }
 
-    private void Move()
+    private void Move(StationBlock block)
     {
         Moved?.Invoke();
         transform.DOMoveX(transform.position.x - _distanceBetweenBlocks, _moveSpeed);
+        _blocks.Remove(block);
         _currentBlocksCount--;
         
         if (_currentBlocksCount == 0)
             Destroyed?.Invoke();
     }
 
-    private void DestroyBlocks(float time)
+    private void DestroyBlocks()
     {
         foreach (StationBlock block in _blocks)
         {
-            Destroy(block.gameObject, time);            
-        }
-    }
-
-    private void DisableBlocks()
-    {
-        foreach (StationBlock block in _blocks)
-        {
-            block.gameObject.SetActive(false);
+            if (block.transform.parent.gameObject.activeSelf)
+                Destroy(block.transform.parent.gameObject);
         }
     }
 }

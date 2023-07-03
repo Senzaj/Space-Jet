@@ -8,6 +8,7 @@ public class MainMenu : Panel
     [SerializeField] private Button _ShopButton;
     [SerializeField] private Button _ExitButton;
     [SerializeField] private Panel _levelSelection;
+    [SerializeField] private Panel _shop;
 
     private void OnEnable()
     {
@@ -29,18 +30,19 @@ public class MainMenu : Panel
 
     private void TurnOnLevelSelection()
     {
-        _levelSelection.TurnOn();
         TurnOff();
+        _levelSelection.TurnOn();
     }
 
     private void TurnOnShop()
     {
-
+        TurnOff();
+        _shop.TurnOn();
     }
 
     private void TurnOnSettings()
     {
-
+        TurnOff();
     }
 
     private void Exit()

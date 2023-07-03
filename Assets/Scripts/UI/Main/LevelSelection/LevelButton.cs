@@ -10,6 +10,7 @@ public class LevelButton : MonoBehaviour
     private TMP_Text _index;
     private LevelData _data;
     private ProgressFlags _progressFlags;
+    private PlayersPiggyBank _playersBank;
 
     public event UnityAction<LevelData> LevelSelected;
 
@@ -18,6 +19,7 @@ public class LevelButton : MonoBehaviour
         _button = GetComponent<Button>();
         _index = GetComponentInChildren<TMP_Text>();
         _progressFlags = GetComponentInChildren<ProgressFlags>();
+        _playersBank = FindFirstObjectByType<PlayersPiggyBank>();
         _button.onClick.AddListener(Clicked);
     }
 
@@ -50,14 +52,21 @@ public class LevelButton : MonoBehaviour
         else if (_data.IsLevelComplete && _data.IsLevelFullyComplete == false)
         {
             if (isPlayerDamaged == false)
+            {
                 _progressFlags.ChangeSecondFlag();
+                _playersBank.GetCoin();
+            }
         }
         else if (_data.IsLevelComplete == false && _data.IsLevelFullyComplete == false)
         {
             _progressFlags.ChangeFirstFlag();
+            _playersBank.GetCoin();
 
             if (isPlayerDamaged == false)
+            {
                 _progressFlags.ChangeSecondFlag();
+                _playersBank.GetCoin();
+            }
         }
     }
 
