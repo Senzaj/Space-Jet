@@ -42,11 +42,11 @@ public class MainMenu : Panel
 
     private void TurnOnSettings()
     {
-        TurnOff();
+        
     }
 
     private void Exit()
     {
-
+        Application.Quit();
     }
 }

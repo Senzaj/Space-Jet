@@ -1,12 +1,24 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpaceFighterShooting : MonoBehaviour
 {
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private float _shootCooldown;
+    [SerializeField] private Button _shootButton;
     
     private ObjectPool _torpedoPool;
     private float _passedTime;
+
+    private void OnEnable()
+    {
+        _shootButton.onClick.AddListener(Shoot);
+    }
+
+    private void OnDisable()
+    {
+        _shootButton.onClick.RemoveListener(Shoot);
+    }
 
     private void Start()
     {
@@ -16,16 +28,14 @@ public class SpaceFighterShooting : MonoBehaviour
     private void Update()
     {
         _passedTime += Time.deltaTime;
-
-        if (Input.GetMouseButtonDown(0) && _passedTime > _shootCooldown)
-        {
-            Shoot();
-            _passedTime = 0;
-        }
     }
 
     private void Shoot()
     {
-        _torpedoPool.Spawn(_shootPoint.position);
+        if (_passedTime > _shootCooldown)
+        {
+            _torpedoPool.Spawn(_shootPoint.position);
+            _passedTime = 0;
+        }
     }
 }

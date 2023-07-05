@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class LevelSelection : Panel
 {
-    [SerializeField] private List<LevelData> _data;
     [SerializeField] private GameObject _content;
     [SerializeField] private LevelControl _control; 
     [SerializeField] private LevelButton _buttonTemplate;
@@ -15,9 +14,13 @@ public class LevelSelection : Panel
     public int LevelCount => _data.Count;
 
     private List<LevelButton> _buttons;
+    private List<LevelData> _data = new List<LevelData>();
 
     private void Awake()
     {
+        foreach (Transform child in _control.transform)
+            _data.Add(child.GetComponent<LevelData>());
+
         _buttons = new List<LevelButton>();
         CanvasGroup = GetComponent<CanvasGroup>();
         TurnOff();

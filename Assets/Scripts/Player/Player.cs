@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int _maxHP;
     [SerializeField] private ParticleSystem _breakdown;
     [SerializeField] private LevelControl _levelControl;
+    [SerializeField] private GameObject _startFighter;
 
     public int MaxHP => _maxHP;
 
@@ -19,10 +20,12 @@ public class Player : MonoBehaviour
     private SpaceFighterMover _mover;
     private SpaceFighterShooting _shooting;
     private SpaceStation _station;
+    private GameObject _currentFighter;
     private bool _isDamaged;
 
     private void OnEnable()
     {
+        ChangeFighter(_startFighter);
         _station = FindFirstObjectByType<SpaceStation>();
         _mover = GetComponent<SpaceFighterMover>();
         _shooting = GetComponent<SpaceFighterShooting>();
@@ -35,6 +38,14 @@ public class Player : MonoBehaviour
     private void OnDisable()
     {
         _levelControl.LevelStarted -= StartLevel;
+    }
+
+    public void ChangeFighter(GameObject fighter)
+    {
+        if (_currentFighter != null)
+            Destroy(_currentFighter);
+
+        _currentFighter = Instantiate(fighter, transform.position, Quaternion.identity, transform);
     }
 
     public void TakeDamage(int damage)

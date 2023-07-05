@@ -350,6 +350,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: CheckMark
+      rect:
+        serializedVersion: 2
+        x: 806
+        y: 556
+        width: 52
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc65a3c6a17e3d6429d2f993a83423a7
+      internalID: -251318042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -361,6 +382,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      CheckMark: -251318042
       Close: 2078160462
       Empty: -539582307
       Exit: -1583526959
