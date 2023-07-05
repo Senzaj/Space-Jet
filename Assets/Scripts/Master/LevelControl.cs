@@ -42,7 +42,7 @@ public class LevelControl : MonoBehaviour
     private void LoadLevel(LevelData data)
     {
         _currentLevel = data;
-        _station.SetParams(data.StationBlocksCount , data.MinShieldsCount, data.MaxShieldsCount);
+        _station.SetParams(data.StationBlocksCount, data.RotationSpeed , data.MinShieldsCount, data.MaxShieldsCount);
         LevelStarted?.Invoke();
         _gamePanel.TurnOn();
     }

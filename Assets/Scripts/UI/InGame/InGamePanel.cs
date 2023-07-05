@@ -21,7 +21,6 @@ public class InGamePanel : Panel
 
     private void StopGame()
     {
-        _spaceStation.StopRotation();
         Time.timeScale = 0;
         TurnOff();
         _pausePanel.TurnOn();

@@ -26,7 +26,6 @@ public class PausePanel : Panel
     private void ContinueGame()
     {
         Time.timeScale = 1;
-        _spaceStation.ContinueRotation();
         TurnOff();
         _gamePanel.TurnOn();
     }
@@ -34,7 +33,6 @@ public class PausePanel : Panel
     private void LoseGame()
     {
         Time.timeScale = 1;
-        _spaceStation.ContinueRotation();
         TurnOff();
         _player.TakeDamage(_player.MaxHP);
     }

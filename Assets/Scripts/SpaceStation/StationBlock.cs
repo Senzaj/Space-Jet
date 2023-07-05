@@ -10,6 +10,7 @@ public class StationBlock : MonoBehaviour
     [SerializeField] private float _turnOffShieldsSpeed;
     [SerializeField] private float _getAwaySpeed;
     [SerializeField] private ParticleSystem _fire;
+    [SerializeField] private ParticleSystem _bigBoom;
 
     public event UnityAction<StationBlock> Destroyed;
 
@@ -63,6 +64,7 @@ public class StationBlock : MonoBehaviour
                     shield.TurnOff(_turnOffShieldsSpeed);
             }
 
+            _bigBoom.Play();
             transform.DOMove(_destroyerPosition.position - transform.position, _getAwaySpeed);
             Destroyed?.Invoke(this);
         }

@@ -2,13 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
-using Unity.VisualScripting;
 
 public class SpaceStation : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _appearingAndDisappearingSpeed;
-    [SerializeField] private float _rotationSpeed;
     [SerializeField] private GameObject _blockTemplate;
     [SerializeField] private float _distanceBetweenBlocks;
     [SerializeField] private LevelControl _levelControl;
@@ -23,12 +21,12 @@ public class SpaceStation : MonoBehaviour
 
     private Player _player;
     private int _blocksCount;
+    private float _rotationSpeed;
     private int _maxShieldCount;
     private int _minShieldCount;
     private Vector3 _spawnPosition;
     private List<StationBlock> _blocks;
     private int _currentBlocksCount;
-    private float _maxRotationSpeed;
 
     private void Update()
     {
@@ -41,7 +39,6 @@ public class SpaceStation : MonoBehaviour
         transform.position = _stationEnd.position;
         _levelControl.LevelStarted += Spawn;
         _player.Lost += GoEndPosition;
-        _maxRotationSpeed = _rotationSpeed;
     }
 
     private void OnDisable()
@@ -53,19 +50,10 @@ public class SpaceStation : MonoBehaviour
             block.Destroyed -= Move;
     }
 
-    public void StopRotation()
-    {
-        _rotationSpeed = 0;
-    }
-
-    public void ContinueRotation()
-    {
-        _rotationSpeed = _maxRotationSpeed;
-    }
-
-    public void SetParams(int blocksCount, int minShields, int maxShields)
+    public void SetParams(int blocksCount, float rotationSpeed , int minShields, int maxShields)
     {
         _blocksCount = blocksCount;
+        _rotationSpeed = rotationSpeed;
         _minShieldCount = minShields;
         _maxShieldCount = maxShields;
     }
@@ -74,6 +62,7 @@ public class SpaceStation : MonoBehaviour
     {
         if (_blocks != null)
             DestroyBlocks();
+
         _blocks = new List<StationBlock>();
         transform.position = _stationEnd.position;
         _spawnPosition = transform.position;
@@ -104,7 +93,7 @@ public class SpaceStation : MonoBehaviour
 
     private void Rotate()
     {
-        transform.Rotate(_rotationSpeed, 0, 0);
+        transform.Rotate(_rotationSpeed * Time.deltaTime, 0, 0);
     }
 
     private void Move(StationBlock block)
