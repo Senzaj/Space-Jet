@@ -9947,6 +9947,8 @@ MonoBehaviour:
   _getAwaySpeed: 5
   _fire: {fileID: 1011332515487386226, guid: 2f540eb995c48e54387bbeec462c138e, type: 3}
   _bigBoom: {fileID: 1302272857}
+  _hitSound: {fileID: 8300000, guid: 38a5f8d5bd825754a80027604ef2539e, type: 3}
+  _explosionSound: {fileID: 8300000, guid: becf4ed52a3315447a78e0f8ef22e8e9, type: 3}
 --- !u!65 &274070657351370522
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10022,6 +10024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b59e4c2a3662948af7c8385fb47135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hitSound: {fileID: 8300000, guid: 13c172deb88f9444e89a2885228586c0, type: 3}
 --- !u!54 &2304765570215917581
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10280,6 +10283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b59e4c2a3662948af7c8385fb47135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hitSound: {fileID: 8300000, guid: 13c172deb88f9444e89a2885228586c0, type: 3}
 --- !u!54 &504042280089121354
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10342,6 +10346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b59e4c2a3662948af7c8385fb47135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hitSound: {fileID: 8300000, guid: 13c172deb88f9444e89a2885228586c0, type: 3}
 --- !u!54 &7431013853327822972
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10404,6 +10409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b59e4c2a3662948af7c8385fb47135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hitSound: {fileID: 8300000, guid: 13c172deb88f9444e89a2885228586c0, type: 3}
 --- !u!54 &7040589719427714142
 Rigidbody:
   m_ObjectHideFlags: 0

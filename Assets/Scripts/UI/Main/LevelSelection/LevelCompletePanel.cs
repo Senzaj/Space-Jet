@@ -13,10 +13,13 @@ public class LevelCompletePanel : Panel
     [SerializeField] private RawImage _flag;
     [SerializeField] private Color _falseColor;
     [SerializeField] private Color _trueColor;
+    [SerializeField] private AudioClip _victorySound;
+    [SerializeField] private AudioSource _audioSource;
 
     private void OnEnable()
     {
         CanvasGroup = GetComponent<CanvasGroup>();
+        ClickSound = FindAnyObjectByType<ClickAudioSource>().GetComponent<AudioSource>();
         TurnOff();
         _control.LevelComplete += OpenPanel;
         _backToMenuButton.onClick.AddListener(OpenMainMenu);
@@ -32,6 +35,8 @@ public class LevelCompletePanel : Panel
 
     private void OpenPanel(LevelData data, bool isPlayerDamaged)
     {
+        _audioSource.PlayOneShot(_victorySound);
+
         if (isPlayerDamaged)
             _flag.color = _falseColor;
         else 
@@ -53,12 +58,14 @@ public class LevelCompletePanel : Panel
 
     private void OpenMainMenu()
     {
+        ClickSound.Play();
         TurnOff();
         _mainMenu.TurnOn();
     }
 
     private void StartNextLevel()
     {
+        ClickSound.Play();
         TurnOff();
     }
 }

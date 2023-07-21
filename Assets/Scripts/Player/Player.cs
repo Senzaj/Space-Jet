@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private ParticleSystem _breakdown;
     [SerializeField] private LevelControl _levelControl;
     [SerializeField] private GameObject _startFighter;
+    [SerializeField] private AudioSource _empSound;
 
     public int MaxHP => _maxHP;
 
@@ -25,7 +26,9 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        ChangeFighter(_startFighter);
+        if (PlayerPrefs.HasKey(PlayerPrefsVariables.LastFighterSelected) == false)
+            ChangeFighter(_startFighter);
+
         _station = FindFirstObjectByType<SpaceStation>();
         _mover = GetComponent<SpaceFighterMover>();
         _shooting = GetComponent<SpaceFighterShooting>();
@@ -33,6 +36,18 @@ public class Player : MonoBehaviour
         _station.Destroyed += OnStationDestroyed;
 
         _shooting.enabled = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out PlayerStartPosition pos))
+            _shooting.enabled = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent(out PlayerStartPosition pos))
+            _shooting.enabled = false;
     }
 
     private void OnDisable()
@@ -50,6 +65,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        _empSound.Play();
         _currentHP -= damage;
         _isDamaged = true;
         _currentHP = Mathf.Clamp(_currentHP, 0, _maxHP);
@@ -62,7 +78,6 @@ public class Player : MonoBehaviour
     {
         if (_currentHP == 0)
         {
-            _shooting.enabled = false;
             _mover.GoToEndPosition();
             Lost?.Invoke();
         }
@@ -74,13 +89,11 @@ public class Player : MonoBehaviour
         _currentHP = _maxHP;
         HealthChanged.Invoke(_currentHP);
         _isDamaged = false;
-        _shooting.enabled = true;
     }
 
     private void OnStationDestroyed()
     {
         Won?.Invoke(_isDamaged);
-        _shooting.enabled = false;
         _mover.GoToEndPosition();
     }
 }

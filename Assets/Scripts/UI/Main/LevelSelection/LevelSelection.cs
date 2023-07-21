@@ -1,3 +1,4 @@
+using Agava.YandexGames;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,7 +24,11 @@ public class LevelSelection : Panel
 
         _buttons = new List<LevelButton>();
         CanvasGroup = GetComponent<CanvasGroup>();
+        ClickSound = FindAnyObjectByType<ClickAudioSource>().GetComponent<AudioSource>();
         TurnOff();
+
+        if (PlayerPrefs.HasKey(PlayerPrefsVariables.NumberOfCompletedLevels))
+            _minAvailableLevelIndex = PlayerPrefs.GetInt(PlayerPrefsVariables.NumberOfCompletedLevels);
 
         foreach (var data in _data)
         {
@@ -55,6 +60,7 @@ public class LevelSelection : Panel
 
     private void GoToMenu()
     {
+        ClickSound.Play();
         TurnOff();
         _menu.TurnOn();
     }

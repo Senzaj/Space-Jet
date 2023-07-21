@@ -1,3 +1,4 @@
+using Agava.YandexGames.Samples;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,6 +10,7 @@ public class LevelControl : MonoBehaviour
     [SerializeField] private InGamePanel _gamePanel;
     [SerializeField] private LevelButton _nextLevelButton;
     [SerializeField] private LevelButton _restartLevelButton;
+    [SerializeField] private Yandex _yandex;
 
     public event UnityAction LevelStarted;
     public event UnityAction<LevelData, bool> LevelComplete;
@@ -51,11 +53,13 @@ public class LevelControl : MonoBehaviour
     {
         LevelComplete?.Invoke(_currentLevel, isPlayerDamaged);
         _gamePanel.TurnOff();
+        _yandex.ShowInterstitial();
     }
 
     private void OnPlayerLost()
     {
         LevelFailed?.Invoke(_currentLevel);
         _gamePanel.TurnOff();
+        _yandex.ShowInterstitial();
     }
 }

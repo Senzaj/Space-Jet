@@ -11,6 +11,8 @@ public class StationBlock : MonoBehaviour
     [SerializeField] private float _getAwaySpeed;
     [SerializeField] private ParticleSystem _fire;
     [SerializeField] private ParticleSystem _bigBoom;
+    [SerializeField] private AudioClip _hitSound;
+    [SerializeField] private AudioClip _explosionSound;
 
     public event UnityAction<StationBlock> Destroyed;
 
@@ -18,11 +20,13 @@ public class StationBlock : MonoBehaviour
     private List<EnergyShield> _energyShields;
     private SpaceStation _station;
     private Transform _destroyerPosition;
+    private AudioSource _audioSource;
 
     private void OnEnable()
     {
         _destroyerPosition = FindFirstObjectByType<Destroyer>().transform;
         _station = FindFirstObjectByType<SpaceStation>();
+        _audioSource = FindAnyObjectByType<StationBlockAudioSource>().GetComponent<AudioSource>();
         _energyShields = new List<EnergyShield>();
         _currentHP = _maxHP;
 
@@ -50,6 +54,7 @@ public class StationBlock : MonoBehaviour
 
             _currentHP -= torpedo.Damage;
             _currentHP = Mathf.Clamp(_currentHP, 0, _maxHP);
+            _audioSource.PlayOneShot(_hitSound);
             TryToBeDestroyed();
         }
     }
@@ -64,6 +69,7 @@ public class StationBlock : MonoBehaviour
                     shield.TurnOff(_turnOffShieldsSpeed);
             }
 
+            _audioSource.PlayOneShot(_explosionSound);
             _bigBoom.Play();
             transform.DOMove(_destroyerPosition.position - transform.position, _getAwaySpeed);
             Destroyed?.Invoke(this);

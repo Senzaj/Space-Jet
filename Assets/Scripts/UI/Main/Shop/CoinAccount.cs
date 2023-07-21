@@ -19,5 +19,6 @@ public class CoinAccount : MonoBehaviour
     private void ChangeValue(int numberOfCoin)
     {
         _numberOfCoin.text = numberOfCoin.ToString();
+        PlayerPrefs.SetInt(PlayerPrefsVariables.NumberOfCoins, numberOfCoin);
     }
 }

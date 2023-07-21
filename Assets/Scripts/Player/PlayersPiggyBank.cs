@@ -11,7 +11,11 @@ public class PlayersPiggyBank : MonoBehaviour
 
     private void OnEnable()
     {
+        if (PlayerPrefs.HasKey(PlayerPrefsVariables.NumberOfCoins))
+            _startNumberOfCoin = PlayerPrefs.GetInt(PlayerPrefsVariables.NumberOfCoins);
+
         _currentNumberOfCoin = _startNumberOfCoin;
+        ChangedNumberOfCoin.Invoke(_currentNumberOfCoin);
     }
 
     public void GetCoin()

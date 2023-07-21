@@ -6,6 +6,7 @@ public class SpaceFighterShooting : MonoBehaviour
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private float _shootCooldown;
     [SerializeField] private Button _shootButton;
+    [SerializeField] private AudioSource _shootSound;
     
     private ObjectPool _torpedoPool;
     private float _passedTime;
@@ -34,6 +35,7 @@ public class SpaceFighterShooting : MonoBehaviour
     {
         if (_passedTime > _shootCooldown)
         {
+            _shootSound.Play();
             _torpedoPool.Spawn(_shootPoint.position);
             _passedTime = 0;
         }

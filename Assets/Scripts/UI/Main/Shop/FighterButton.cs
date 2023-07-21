@@ -6,26 +6,34 @@ using UnityEngine.UI;
 public class FighterButton : MonoBehaviour
 {
     [SerializeField] private bool _isFighterBought = false;
+    [SerializeField] private int _index;
     [SerializeField] private GameObject _fighterTemplate;
     [SerializeField] private int _price;
     [SerializeField] private TMP_Text _priceField;
     [SerializeField] private RawImage _starIcon;
     [SerializeField] private Image _checkMarkIcon;
 
+    public int Index => _index;
+
     private Button _button;
     private Player _player;
     private PlayersPiggyBank _playersBank;
+    private AudioSource _clickSound;
 
     private void OnEnable()
     {
         _button = GetComponent<Button>();
         _player = FindFirstObjectByType<Player>();
         _playersBank = FindFirstObjectByType<PlayersPiggyBank>();
+        _clickSound = FindFirstObjectByType<ClickAudioSource>().GetComponent<AudioSource>();
         _priceField.text = _price.ToString();
 
         _button.onClick.AddListener(TryBuyFighter);
 
         _checkMarkIcon.enabled = false;
+
+        if (PlayerPrefs.GetInt(GetFighterName()) == 1)
+            _isFighterBought = true;
 
         if (_isFighterBought)
             RedrawButton();
@@ -36,8 +44,15 @@ public class FighterButton : MonoBehaviour
         _button.onClick.RemoveListener(TryBuyFighter);
     }
 
+    public void ChangePlayersFighter()
+    {
+        _player.ChangeFighter(_fighterTemplate);
+        PlayerPrefs.SetInt(PlayerPrefsVariables.LastFighterSelected, _index);
+    }
+
     private void TryBuyFighter()
     {
+        _clickSound.Play();
 
         if (_isFighterBought == false)
         {
@@ -46,12 +61,13 @@ public class FighterButton : MonoBehaviour
                 _playersBank.TakeCoin(_price);
                 _isFighterBought=true;
                 RedrawButton();
-                _player.ChangeFighter(_fighterTemplate);
+                PlayerPrefs.SetInt(GetFighterName(), 1);
+                ChangePlayersFighter();
             }
         }
         else
         {
-            _player.ChangeFighter(_fighterTemplate);
+            ChangePlayersFighter();
         }
     }
 
@@ -60,5 +76,10 @@ public class FighterButton : MonoBehaviour
         _priceField.enabled = false;
         _starIcon.enabled = false;
         _checkMarkIcon.enabled = true;
+    }
+
+    private string GetFighterName()
+    {
+        return "fighter" + _index;
     }
 }

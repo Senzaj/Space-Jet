@@ -7,10 +7,13 @@ public class LevelFailedPanel : Panel
     [SerializeField] private Button _restartLevelButton;
     [SerializeField] private LevelControl _levelControl;
     [SerializeField] private MainMenu _mainMenu;
+    [SerializeField] private AudioClip _loseSound;
+    [SerializeField] private AudioSource _audioSource;
 
     private void OnEnable()
     {
         CanvasGroup = GetComponent<CanvasGroup>();
+        ClickSound = FindAnyObjectByType<ClickAudioSource>().GetComponent<AudioSource>();
         TurnOff();
         _levelControl.LevelFailed += OpenPanel;
         _backToMenuButton.onClick.AddListener(OpenMainMenu);
@@ -26,6 +29,7 @@ public class LevelFailedPanel : Panel
 
     private void OpenPanel(LevelData data)
     {
+        _audioSource.PlayOneShot(_loseSound);
         LevelButton Level = _restartLevelButton.GetComponent<LevelButton>();
         Level.SetLevelData(data);
         TurnOn();
@@ -33,12 +37,14 @@ public class LevelFailedPanel : Panel
 
     private void OpenMainMenu()
     {
+        ClickSound.Play();
         TurnOff();
         _mainMenu.TurnOn();
     }
 
     private void RestartLevel()
     {
+        ClickSound.Play();
         TurnOff();
     }
 }

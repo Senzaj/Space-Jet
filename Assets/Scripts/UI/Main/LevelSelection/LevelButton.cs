@@ -11,6 +11,7 @@ public class LevelButton : MonoBehaviour
     private LevelData _data;
     private ProgressFlags _progressFlags;
     private PlayersPiggyBank _playersBank;
+    private AudioSource _clickSound;
 
     public event UnityAction<LevelData> LevelSelected;
 
@@ -20,7 +21,28 @@ public class LevelButton : MonoBehaviour
         _index = GetComponentInChildren<TMP_Text>();
         _progressFlags = GetComponentInChildren<ProgressFlags>();
         _playersBank = FindFirstObjectByType<PlayersPiggyBank>();
+        _clickSound = FindFirstObjectByType<ClickAudioSource>().GetComponent<AudioSource>();
         _button.onClick.AddListener(Clicked);
+    }
+
+    private void Start()
+    {
+        if (_data != null && PlayerPrefs.HasKey(GetLevelName()))
+        {
+            int numberOfStarsPerLevel = PlayerPrefs.GetInt(GetLevelName());
+
+            if (numberOfStarsPerLevel == 1)
+            {
+                _data.CompleteLevel();
+                _progressFlags.ChangeFirstFlag();
+            }
+            else if (numberOfStarsPerLevel == 2)
+            {
+                _data.CompleteLevelFully();
+                _progressFlags.ChangeFirstFlag();
+                _progressFlags.ChangeSecondFlag();
+            }
+        }
     }
 
     private void OnDisable()
@@ -52,26 +74,37 @@ public class LevelButton : MonoBehaviour
         else if (_data.IsLevelComplete && _data.IsLevelFullyComplete == false)
         {
             if (isPlayerDamaged == false)
-            {
-                _progressFlags.ChangeSecondFlag();
-                _playersBank.GetCoin();
-            }
+                LevelFullyComplete();
         }
         else if (_data.IsLevelComplete == false && _data.IsLevelFullyComplete == false)
         {
             _progressFlags.ChangeFirstFlag();
+            PlayerPrefs.SetInt(GetLevelName(), 1);
             _playersBank.GetCoin();
 
+            int levelIndex = _data.LevelIndex;
+            PlayerPrefs.SetInt(PlayerPrefsVariables.NumberOfCompletedLevels, ++levelIndex);
+
             if (isPlayerDamaged == false)
-            {
-                _progressFlags.ChangeSecondFlag();
-                _playersBank.GetCoin();
-            }
+                LevelFullyComplete();
         }
+    }
+
+    public string GetLevelName()
+    {
+        return "Level" + _data.LevelIndex;
     }
 
     private void Clicked()
     {
+        _clickSound.Play();
         LevelSelected?.Invoke(_data);
+    }
+
+    private void LevelFullyComplete()
+    {
+        _progressFlags.ChangeSecondFlag();
+        _playersBank.GetCoin();
+        PlayerPrefs.SetInt(GetLevelName(), 2);
     }
 }

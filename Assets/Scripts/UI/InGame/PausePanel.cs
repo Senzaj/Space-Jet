@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Timeline;
 using UnityEngine.UI;
 
 public class PausePanel : Panel
@@ -8,10 +9,12 @@ public class PausePanel : Panel
     [SerializeField] private InGamePanel _gamePanel;
     [SerializeField] private SpaceStation _spaceStation;
     [SerializeField] private Player _player;
+    [SerializeField] private TimeControl _timeControl;
 
     private void OnEnable()
     {
         CanvasGroup = GetComponent<CanvasGroup>();
+        ClickSound = FindAnyObjectByType<ClickAudioSource>().GetComponent<AudioSource>();
         TurnOff();
         _continueGameButton.onClick.AddListener(ContinueGame);
         _loseButton.onClick.AddListener(LoseGame);
@@ -25,14 +28,16 @@ public class PausePanel : Panel
 
     private void ContinueGame()
     {
-        Time.timeScale = 1;
+        ClickSound.Play();
+        _timeControl.ContinueTime();
         TurnOff();
         _gamePanel.TurnOn();
     }
 
     private void LoseGame()
     {
-        Time.timeScale = 1;
+        ClickSound.Play();
+        _timeControl.ContinueTime();
         TurnOff();
         _player.TakeDamage(_player.MaxHP);
     }

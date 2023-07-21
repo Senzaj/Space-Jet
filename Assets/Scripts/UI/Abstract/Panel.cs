@@ -1,9 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent (typeof(CanvasGroup))]
 public abstract class Panel : MonoBehaviour
 {
     protected CanvasGroup CanvasGroup;
+    protected AudioSource ClickSound;
 
     public void TurnOn()
     {
