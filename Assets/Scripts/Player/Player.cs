@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
 
     private void OnStationDestroyed()
     {
-        Won?.Invoke(_isDamaged);
         _mover.GoToEndPosition();
+        Won?.Invoke(_isDamaged);
     }
 }

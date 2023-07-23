@@ -72,6 +72,7 @@ public class StationBlock : MonoBehaviour
             _audioSource.PlayOneShot(_explosionSound);
             _bigBoom.Play();
             transform.DOMove(_destroyerPosition.position - transform.position, _getAwaySpeed);
+            transform.parent.parent = null;
             Destroyed?.Invoke(this);
         }
     }

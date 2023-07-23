@@ -9944,7 +9944,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHP: 3
   _turnOffShieldsSpeed: 1.5
-  _getAwaySpeed: 5
+  _getAwaySpeed: 3
   _fire: {fileID: 1011332515487386226, guid: 2f540eb995c48e54387bbeec462c138e, type: 3}
   _bigBoom: {fileID: 1302272857}
   _hitSound: {fileID: 8300000, guid: 38a5f8d5bd825754a80027604ef2539e, type: 3}
