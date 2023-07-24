@@ -1,3 +1,4 @@
+using Agava.YandexGames.Samples;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,7 @@ public class LevelCompletePanel : Panel
     [SerializeField] private Color _trueColor;
     [SerializeField] private AudioClip _victorySound;
     [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private Yandex _yandex;
 
     private void OnEnable()
     {
@@ -58,6 +60,7 @@ public class LevelCompletePanel : Panel
     private void OpenMainMenu()
     {
         ClickSoundSource.Play();
+        _yandex.ShowInterstitial();
         TurnOff();
         _mainMenu.TurnOn();
     }
@@ -65,6 +68,7 @@ public class LevelCompletePanel : Panel
     private void StartNextLevel()
     {
         ClickSoundSource.Play();
+        _yandex.ShowInterstitial();
         TurnOff();
     }
 }

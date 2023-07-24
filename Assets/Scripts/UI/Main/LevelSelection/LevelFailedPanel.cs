@@ -1,3 +1,4 @@
+using Agava.YandexGames.Samples;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class LevelFailedPanel : Panel
     [SerializeField] private MainMenu _mainMenu;
     [SerializeField] private AudioClip _loseSound;
     [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private Yandex _yandex;
 
     private void OnEnable()
     {
@@ -37,6 +39,7 @@ public class LevelFailedPanel : Panel
     private void OpenMainMenu()
     {
         ClickSoundSource.Play();
+        _yandex.ShowInterstitial();
         TurnOff();
         _mainMenu.TurnOn();
     }
@@ -44,6 +47,7 @@ public class LevelFailedPanel : Panel
     private void RestartLevel()
     {
         ClickSoundSource.Play();
+        _yandex.ShowInterstitial();
         TurnOff();
     }
 }

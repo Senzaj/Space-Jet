@@ -1,11 +1,7 @@
 using UnityEngine.UI;
 using UnityEngine;
 using System.Collections.Generic;
-using Agava.YandexGames.Samples;
-using Agava.WebUtility;
 
-[RequireComponent(typeof(Button))]
-[RequireComponent(typeof(Image))]
 public class AudioVolumeControlButton : MonoBehaviour
 {
     [SerializeField] private List<AudioSource> _audioSources;
@@ -14,10 +10,10 @@ public class AudioVolumeControlButton : MonoBehaviour
     [SerializeField] private Color _enableColor;
     [SerializeField] private Color _disableColor;
     [SerializeField] private AudioSource _clickSound;
+    [SerializeField] private List<Button> _buttons;
+    [SerializeField] private List<Image> _buttonImages;
 
     private string _playerPrefsVariableName;
-    private Button _button;
-    private Image _image;
     private bool _isAudioOn;
 
     private void OnEnable()
@@ -32,9 +28,8 @@ public class AudioVolumeControlButton : MonoBehaviour
         if (PlayerPrefs.HasKey(_playerPrefsVariableName))
             _isAudioOn = PlayerPrefs.GetInt(_playerPrefsVariableName) == 1;
 
-        _button = GetComponent<Button>();
-        _image = GetComponent<Image>();
-        _button.onClick.AddListener(SwitchVolume);
+        foreach (Button button in _buttons)
+            button.onClick.AddListener(SwitchVolume);
 
         if (_isAudioOn == false)
             SetVolume(_minVolume, _disableColor);
@@ -44,7 +39,8 @@ public class AudioVolumeControlButton : MonoBehaviour
 
     private void OnDisable()
     {
-        _button.onClick.RemoveListener(SwitchVolume);
+        foreach (Button button in _buttons)
+            button.onClick.RemoveListener(SwitchVolume);
     }
 
     public void SwitchVolume()
@@ -70,6 +66,7 @@ public class AudioVolumeControlButton : MonoBehaviour
         foreach (AudioSource source in _audioSources)
             source.volume = volume;
 
-        _image.color = color;
+        foreach (Image buttonImage in _buttonImages)
+            buttonImage.color = color;
     }
 }
