@@ -23,6 +23,13 @@ public class PlayersPiggyBank : MonoBehaviour
         _currentNumberOfCoin++;
         ChangedNumberOfCoin.Invoke(_currentNumberOfCoin);
     }
+
+    public void AddCoin(int coins)
+    {
+        _currentNumberOfCoin+= coins;
+        ChangedNumberOfCoin.Invoke(_currentNumberOfCoin);
+    }
+
     public bool AreEnoughCoins(int coin)
     {
         return _currentNumberOfCoin >= coin;

@@ -8,15 +8,15 @@ public class AudioListenerSwitcher : MonoBehaviour
 
     private void OnEnable()
     {
-        _yandex.InterstitialOpened += OnInterstitialOpened;
-        _yandex.InterstitialClosed += OnInterstitialClosed;
+        _yandex.AdOpened += OnInterstitialOpened;
+        _yandex.AdClosed += OnInterstitialClosed;
         WebApplication.InBackgroundChangeEvent += OnInBackgroundChange;
     }
 
     private void OnDisable()
     {
-        _yandex.InterstitialOpened -= OnInterstitialOpened;
-        _yandex.InterstitialClosed -= OnInterstitialClosed;
+        _yandex.AdOpened -= OnInterstitialOpened;
+        _yandex.AdClosed -= OnInterstitialClosed;
         WebApplication.InBackgroundChangeEvent -= OnInBackgroundChange;
     }
 

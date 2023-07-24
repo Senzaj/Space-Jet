@@ -16,9 +16,21 @@ public class LevelData : MonoBehaviour
     public int MaxShieldsCount => _maxShieldsCount;
     public bool IsLevelComplete => _isLevelComplete;
     public bool IsLevelFullyComplete => _isLevelFullyComplete;
+    public bool IsRewardedVideoWatched => _isRewardedVideoWatched;
 
+    private bool _isRewardedVideoWatched = false;
     private bool _isLevelComplete = false;
     private bool _isLevelFullyComplete = false;
+
+    public void OnRewardedVideoShown()
+    {
+        _isRewardedVideoWatched = true;
+    }
+
+    public string GetLevelNameForVideo()
+    {
+        return "RewardedVideoLevel" + _levelIndex;
+    }
 
     public void CompleteLevel()
     {

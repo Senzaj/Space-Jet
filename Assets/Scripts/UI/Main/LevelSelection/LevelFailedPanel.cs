@@ -39,7 +39,7 @@ public class LevelFailedPanel : Panel
     private void OpenMainMenu()
     {
         ClickSoundSource.Play();
-        _yandex.ShowInterstitial();
+        //_yandex.ShowInterstitial();
         TurnOff();
         _mainMenu.TurnOn();
     }
@@ -47,7 +47,7 @@ public class LevelFailedPanel : Panel
     private void RestartLevel()
     {
         ClickSoundSource.Play();
-        _yandex.ShowInterstitial();
+        //_yandex.ShowInterstitial();
         TurnOff();
     }
 }

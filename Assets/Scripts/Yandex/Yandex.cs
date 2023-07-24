@@ -13,8 +13,11 @@ namespace Agava.YandexGames.Samples
 {
     public class Yandex : MonoBehaviour
     {
-        public Action InterstitialOpened;
-        public Action<bool> InterstitialClosed;
+        [SerializeField] private PlayersPiggyBank _playersPiggyBank;
+        [SerializeField] private int Reward = 2;
+
+        public Action AdOpened;
+        public Action<bool> AdClosed;
         private string _currentLanguage;
 
         private void Awake()
@@ -69,12 +72,12 @@ namespace Agava.YandexGames.Samples
 
         public void ShowInterstitial()
         {
-            InterstitialAd.Show(OnInterstitialOpened, OnInterstitialClosed);
+            InterstitialAd.Show(OnAdOpened, OnAdClosed);
         }
 
         public void ShowVideo()
         {
-            VideoAd.Show();
+            VideoAd.Show(OnAdOpened, OnRewarded, OnAdClosed);
         }
 
         public void ShowStickyAd()
@@ -98,16 +101,27 @@ namespace Agava.YandexGames.Samples
             ShowStickyAd();
         }
 
-        private void OnInterstitialOpened()
+        private void OnRewarded()
         {
-            Time.timeScale = 0;
-            InterstitialOpened.Invoke();
+            _playersPiggyBank.AddCoin(Reward);
         }
 
-        private void OnInterstitialClosed(bool showed)
+        private void OnAdOpened()
+        {
+            Time.timeScale = 0;
+            AdOpened.Invoke();
+        }
+
+        private void OnAdClosed(bool showed)
         {
             Time.timeScale = 1;
-            InterstitialClosed.Invoke(showed);
+            AdClosed.Invoke(showed);
+        }
+
+        private void OnAdClosed()
+        {
+            Time.timeScale = 1;
+            AdClosed.Invoke(true);
         }
     }
 }

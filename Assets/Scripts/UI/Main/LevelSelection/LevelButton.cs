@@ -92,7 +92,7 @@ public class LevelButton : MonoBehaviour
 
     public string GetLevelName()
     {
-        return "Level" + _data.LevelIndex;
+        return "ProgressOfLevel" + _data.LevelIndex;
     }
 
     private void Clicked()
