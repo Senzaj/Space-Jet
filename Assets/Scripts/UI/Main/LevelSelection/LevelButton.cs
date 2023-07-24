@@ -79,6 +79,7 @@ public class LevelButton : MonoBehaviour
         else if (_data.IsLevelComplete == false && _data.IsLevelFullyComplete == false)
         {
             _progressFlags.ChangeFirstFlag();
+            _data.CompleteLevel();
             PlayerPrefs.SetInt(GetLevelName(), 1);
             _playersBank.AddCoin();
 
@@ -104,6 +105,7 @@ public class LevelButton : MonoBehaviour
     private void LevelFullyComplete()
     {
         _progressFlags.ChangeSecondFlag();
+        _data.CompleteLevelFully();
         _playersBank.AddCoin();
         PlayerPrefs.SetInt(GetLevelName(), 2);
     }
