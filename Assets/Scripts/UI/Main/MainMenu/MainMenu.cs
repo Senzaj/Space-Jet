@@ -11,7 +11,6 @@ public class MainMenu : Panel
     private void OnEnable()
     {
         CanvasGroup = GetComponent<CanvasGroup>();
-        ClickSound = FindAnyObjectByType<ClickAudioSource>().GetComponent<AudioSource>();
         TurnOn();
         _playButton.onClick.AddListener(TurnOnLevelSelection);
         _ShopButton.onClick.AddListener(TurnOnShop);
@@ -25,14 +24,14 @@ public class MainMenu : Panel
 
     private void TurnOnLevelSelection()
     {
-        ClickSound.Play();
+        ClickSoundSource.Play();
         TurnOff();
         _levelSelection.TurnOn();
     }
 
     private void TurnOnShop()
     {
-        ClickSound.Play();
+        ClickSoundSource.Play();
         TurnOff();
         _shop.TurnOn();
     }

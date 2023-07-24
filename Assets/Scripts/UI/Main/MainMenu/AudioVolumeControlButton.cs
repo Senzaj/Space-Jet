@@ -13,12 +13,12 @@ public class AudioVolumeControlButton : MonoBehaviour
     [SerializeField] private float _maxVolume;
     [SerializeField] private Color _enableColor;
     [SerializeField] private Color _disableColor;
+    [SerializeField] private AudioSource _clickSound;
 
     private string _playerPrefsVariableName;
     private Button _button;
     private Image _image;
     private bool _isAudioOn;
-    private AudioSource _clickSound;
 
     private void OnEnable()
     {
@@ -32,7 +32,6 @@ public class AudioVolumeControlButton : MonoBehaviour
         if (PlayerPrefs.HasKey(_playerPrefsVariableName))
             _isAudioOn = PlayerPrefs.GetInt(_playerPrefsVariableName) == 1;
 
-        _clickSound = FindAnyObjectByType<ClickAudioSource>().GetComponent<AudioSource>();
         _button = GetComponent<Button>();
         _image = GetComponent<Image>();
         _button.onClick.AddListener(SwitchVolume);

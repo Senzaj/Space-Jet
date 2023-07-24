@@ -19,7 +19,6 @@ public class LevelCompletePanel : Panel
     private void OnEnable()
     {
         CanvasGroup = GetComponent<CanvasGroup>();
-        ClickSound = FindAnyObjectByType<ClickAudioSource>().GetComponent<AudioSource>();
         TurnOff();
         _control.LevelComplete += OpenPanel;
         _backToMenuButton.onClick.AddListener(OpenMainMenu);
@@ -58,14 +57,14 @@ public class LevelCompletePanel : Panel
 
     private void OpenMainMenu()
     {
-        ClickSound.Play();
+        ClickSoundSource.Play();
         TurnOff();
         _mainMenu.TurnOn();
     }
 
     private void StartNextLevel()
     {
-        ClickSound.Play();
+        ClickSoundSource.Play();
         TurnOff();
     }
 }

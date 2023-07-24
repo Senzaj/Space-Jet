@@ -12,6 +12,7 @@ public class SpaceStation : MonoBehaviour
     [SerializeField] private LevelControl _levelControl;
     [SerializeField] private Transform _stationStart;
     [SerializeField] private Transform _stationEnd;
+    [SerializeField] private Player _player;
 
     public int MaxShieldCount => _maxShieldCount;
     public int MinShieldCount => _minShieldCount;
@@ -19,7 +20,6 @@ public class SpaceStation : MonoBehaviour
     public event UnityAction Moved;
     public event UnityAction Destroyed;
 
-    private Player _player;
     private int _blocksCount;
     private float _rotationSpeed;
     private int _maxShieldCount;
@@ -35,7 +35,6 @@ public class SpaceStation : MonoBehaviour
 
     private void OnEnable()
     {
-        _player = FindFirstObjectByType<Player>();
         transform.position = _stationEnd.position;
         _levelControl.LevelStarted += Spawn;
         _player.Lost += GoEndPosition;

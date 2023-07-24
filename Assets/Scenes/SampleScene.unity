@@ -1593,6 +1593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _template: {fileID: 4462835912726211822, guid: e31ce96b02b998b4794345ffbe302a1d, type: 3}
   _poolCapacity: 5
+  _player: {fileID: 919132147824574490}
 --- !u!1 &281121492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1732,10 +1733,10 @@ RectTransform:
   m_Father: {fileID: 1196371455}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 374.23425, y: -816}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &292645948
 MonoBehaviour:
@@ -1832,6 +1833,7 @@ MonoBehaviour:
   _checkMarkIcon: {fileID: 966885072}
   _player: {fileID: 919132147824574490}
   _playersBank: {fileID: 919132147824574494}
+  _clickSound: {fileID: 203115501}
 --- !u!222 &292645951
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1925,7 +1927,6 @@ Transform:
   - {fileID: 1395201075}
   - {fileID: 85113808}
   - {fileID: 94423012}
-  - {fileID: 767476131}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2643,6 +2644,7 @@ MonoBehaviour:
   _endRotationValue: -360
   _flyingSound: {fileID: 616722929}
   _turnSound: {fileID: 616722928}
+  _station: {fileID: 1891310106}
 --- !u!1 &357156164
 GameObject:
   m_ObjectHideFlags: 0
@@ -2682,10 +2684,10 @@ RectTransform:
   m_Father: {fileID: 1196371455}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 374.23425, y: -1349}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &357156166
 MonoBehaviour:
@@ -2782,6 +2784,7 @@ MonoBehaviour:
   _checkMarkIcon: {fileID: 1700861037}
   _player: {fileID: 919132147824574490}
   _playersBank: {fileID: 919132147824574494}
+  _clickSound: {fileID: 203115501}
 --- !u!222 &357156169
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3539,12 +3542,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d9d0a910594f441a8200022f97177b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClickSoundSource: {fileID: 203115501}
   _loseButton: {fileID: 594728237}
   _continueGameButton: {fileID: 2050388259}
   _gamePanel: {fileID: 980646965}
   _spaceStation: {fileID: 1891310106}
   _player: {fileID: 919132147824574490}
-  _timeControl: {fileID: 767476130}
 --- !u!1 &472174729
 GameObject:
   m_ObjectHideFlags: 0
@@ -4690,7 +4693,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 43.99994, y: -43.99991}
+  m_AnchoredPosition: {x: 44, y: -43.99994}
   m_SizeDelta: {x: 438.67993, y: 120.63904}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &663547988
@@ -4947,6 +4950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464f3f864fa1eb54d9b50bbf9b4649fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClickSoundSource: {fileID: 203115501}
   _playButton: {fileID: 904102408}
   _ShopButton: {fileID: 1336538239}
   _levelSelection: {fileID: 819634285}
@@ -5221,51 +5225,6 @@ MonoBehaviour:
   _minShieldsCount: 1
   _maxShieldsCount: 1
   _control: {fileID: 1508910402}
---- !u!1 &767476129
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 767476131}
-  - component: {fileID: 767476130}
-  m_Layer: 0
-  m_Name: TimeControl
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &767476130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 767476129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f2a979693d979745902d61cc2086595, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _yandex: {fileID: 2066110989}
---- !u!4 &767476131
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 767476129}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 293069692}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &772570220
 GameObject:
   m_ObjectHideFlags: 0
@@ -5779,6 +5738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69ba0043a4e3d545bfcfa31ad7708a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClickSoundSource: {fileID: 203115501}
   _content: {fileID: 1663151224}
   _control: {fileID: 1508910402}
   _buttonTemplate: {fileID: 7670447178158212456, guid: 75763eeaa7abbf14ca3a8e829ac10f74, type: 3}
@@ -6279,10 +6239,10 @@ RectTransform:
   m_Father: {fileID: 1196371455}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 907.23425, y: -283}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &871938248
 MonoBehaviour:
@@ -6379,6 +6339,7 @@ MonoBehaviour:
   _checkMarkIcon: {fileID: 1728686722}
   _player: {fileID: 919132147824574490}
   _playersBank: {fileID: 919132147824574494}
+  _clickSound: {fileID: 203115501}
 --- !u!222 &871938251
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6611,6 +6572,7 @@ MonoBehaviour:
   _maxVolume: 1
   _enableColor: {r: 1, g: 1, b: 1, a: 1}
   _disableColor: {r: 1, g: 0.41960785, b: 0.41960785, a: 0.65882355}
+  _clickSound: {fileID: 203115501}
 --- !u!1 &893708781
 GameObject:
   m_ObjectHideFlags: 0
@@ -6916,6 +6878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _template: {fileID: 4228074716823722115, guid: 01794416fe66ae64a87e5e5df6a26700, type: 3}
   _poolCapacity: 30
+  _player: {fileID: 919132147824574490}
 --- !u!1 &910240828
 GameObject:
   m_ObjectHideFlags: 0
@@ -7022,6 +6985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da3675d7969a1542ad86547e6ae7e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClickSoundSource: {fileID: 203115501}
   _closeButton: {fileID: 1357686988}
   _mainMenu: {fileID: 713017564}
   _content: {fileID: 1196371454}
@@ -7498,10 +7462,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe86213dad8d7b45ad5213266dfd72c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClickSoundSource: {fileID: 203115501}
   _pauseButton: {fileID: 1528025039}
   _pausePanel: {fileID: 455446091}
   _spaceStation: {fileID: 1891310106}
-  _timeControl: {fileID: 767476130}
 --- !u!1 &995614535
 GameObject:
   m_ObjectHideFlags: 0
@@ -8001,6 +7965,7 @@ MonoBehaviour:
   _maxVolume: 1
   _enableColor: {r: 1, g: 1, b: 1, a: 1}
   _disableColor: {r: 1, g: 0.41960785, b: 0.41960785, a: 0.65882355}
+  _clickSound: {fileID: 203115501}
 --- !u!1 &1041179154
 GameObject:
   m_ObjectHideFlags: 0
@@ -8325,10 +8290,10 @@ RectTransform:
   m_Father: {fileID: 1196371455}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1440.2343, y: -816}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1085619633
 MonoBehaviour:
@@ -8425,6 +8390,7 @@ MonoBehaviour:
   _checkMarkIcon: {fileID: 1808840504}
   _player: {fileID: 919132147824574490}
   _playersBank: {fileID: 919132147824574494}
+  _clickSound: {fileID: 203115501}
 --- !u!222 &1085619636
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8472,10 +8438,10 @@ RectTransform:
   m_Father: {fileID: 1196371455}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 907.23425, y: -1349}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1086265494
 MonoBehaviour:
@@ -8572,6 +8538,7 @@ MonoBehaviour:
   _checkMarkIcon: {fileID: 1087886134}
   _player: {fileID: 919132147824574490}
   _playersBank: {fileID: 919132147824574494}
+  _clickSound: {fileID: 203115501}
 --- !u!222 &1086265497
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15400,10 +15367,10 @@ RectTransform:
   m_Father: {fileID: 1196371455}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 374.23425, y: -283}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1315583504
 MonoBehaviour:
@@ -15508,6 +15475,7 @@ MonoBehaviour:
   _checkMarkIcon: {fileID: 2052987791}
   _player: {fileID: 919132147824574490}
   _playersBank: {fileID: 919132147824574494}
+  _clickSound: {fileID: 203115501}
 --- !u!1 &1325504759
 GameObject:
   m_ObjectHideFlags: 0
@@ -17196,10 +17164,10 @@ RectTransform:
   m_Father: {fileID: 1196371455}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1440.2343, y: -283}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1568794550
 MonoBehaviour:
@@ -17296,6 +17264,7 @@ MonoBehaviour:
   _checkMarkIcon: {fileID: 293851256}
   _player: {fileID: 919132147824574490}
   _playersBank: {fileID: 919132147824574494}
+  _clickSound: {fileID: 203115501}
 --- !u!222 &1568794553
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18044,6 +18013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5687deb2066e9ad4283ba52046dcb26e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClickSoundSource: {fileID: 203115501}
   _backToMenuButton: {fileID: 1568295069}
   _nextLevelButton: {fileID: 5577150797006095300}
   _levelIndex: {fileID: 863656788}
@@ -18106,10 +18076,10 @@ RectTransform:
   m_Father: {fileID: 1196371455}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 907.23425, y: -816}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1703133570
 MonoBehaviour:
@@ -18206,6 +18176,7 @@ MonoBehaviour:
   _checkMarkIcon: {fileID: 1476740432}
   _player: {fileID: 919132147824574490}
   _playersBank: {fileID: 919132147824574494}
+  _clickSound: {fileID: 203115501}
 --- !u!222 &1703133573
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18690,6 +18661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87da79a0c0a1ff14f8cfe50e069c7315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ClickSoundSource: {fileID: 203115501}
   _backToMenuButton: {fileID: 33285037}
   _restartLevelButton: {fileID: 2069099777}
   _levelControl: {fileID: 1508910402}
@@ -24444,6 +24416,7 @@ MonoBehaviour:
   _levelControl: {fileID: 1508910402}
   _stationStart: {fileID: 85113808}
   _stationEnd: {fileID: 94423012}
+  _player: {fileID: 919132147824574490}
 --- !u!4 &1891310107
 Transform:
   m_ObjectHideFlags: 0
@@ -26037,6 +26010,7 @@ MonoBehaviour:
   _levelControl: {fileID: 1508910402}
   _startFighter: {fileID: 8831447796758970308, guid: b3ff84a80a7b47341945e01651cc5fce, type: 3}
   _empSound: {fileID: 616722926}
+  _station: {fileID: 1891310106}
 --- !u!54 &919132147824574492
 Rigidbody:
   m_ObjectHideFlags: 0

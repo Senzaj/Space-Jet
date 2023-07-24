@@ -13,7 +13,6 @@ namespace Agava.YandexGames.Samples
 {
     public class Yandex : MonoBehaviour
     {
-        public Action Initialized;
         public Action InterstitialOpened;
         public Action<bool> InterstitialClosed;
         private string _currentLanguage;
@@ -23,25 +22,13 @@ namespace Agava.YandexGames.Samples
             YandexGamesSdk.CallbackLogging = true;
         }
 
-        private void OnEnable()
-        {
-            Initialized += SetLanguage;
-            Initialized += ShowStickyAd;
-        }
-
-        private void OnDisable()
-        {
-            Initialized -= SetLanguage;
-            Initialized -= ShowStickyAd;
-        }
-
         private IEnumerator Start()
         {
             #if !UNITY_WEBGL || UNITY_EDITOR
             yield break;
             #endif
 
-            yield return YandexGamesSdk.Initialize(Initialized);
+            yield return YandexGamesSdk.Initialize(OnInitialized);
         }
 
         public void SetLanguage()
@@ -82,7 +69,7 @@ namespace Agava.YandexGames.Samples
 
         public void ShowInterstitial()
         {
-            InterstitialAd.Show(InterstitialOpened, InterstitialClosed);
+            InterstitialAd.Show(OnInterstitialOpened, OnInterstitialClosed);
         }
 
         public void ShowVideo()
@@ -103,6 +90,24 @@ namespace Agava.YandexGames.Samples
         public void GetEnvironment()
         {
             Debug.Log($"Environment = {JsonUtility.ToJson(YandexGamesSdk.Environment)}");
+        }
+
+        private void OnInitialized()
+        {
+            SetLanguage();
+            ShowStickyAd();
+        }
+
+        private void OnInterstitialOpened()
+        {
+            Time.timeScale = 0;
+            InterstitialOpened.Invoke();
+        }
+
+        private void OnInterstitialClosed(bool showed)
+        {
+            Time.timeScale = 1;
+            InterstitialClosed.Invoke(showed);
         }
     }
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 [RequireComponent (typeof(CanvasGroup))]
 public abstract class Panel : MonoBehaviour
 {
+    [SerializeField] protected AudioSource ClickSoundSource;
     protected CanvasGroup CanvasGroup;
-    protected AudioSource ClickSound;
 
     public void TurnOn()
     {

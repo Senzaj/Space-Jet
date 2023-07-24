@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private LevelControl _levelControl;
     [SerializeField] private GameObject _startFighter;
     [SerializeField] private AudioSource _empSound;
+    [SerializeField] private SpaceStation _station;
 
     public int MaxHP => _maxHP;
 
@@ -20,7 +21,6 @@ public class Player : MonoBehaviour
     private int _currentHP;
     private SpaceFighterMover _mover;
     private SpaceFighterShooting _shooting;
-    private SpaceStation _station;
     private GameObject _currentFighter;
     private bool _isDamaged;
 
@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
         if (PlayerPrefs.HasKey(PlayerPrefsVariables.LastFighterSelected) == false)
             ChangeFighter(_startFighter);
 
-        _station = FindFirstObjectByType<SpaceStation>();
         _mover = GetComponent<SpaceFighterMover>();
         _shooting = GetComponent<SpaceFighterShooting>();
         _levelControl.LevelStarted += StartLevel;

@@ -6,12 +6,10 @@ public class InGamePanel : Panel
     [SerializeField] private Button _pauseButton;
     [SerializeField] private PausePanel _pausePanel;
     [SerializeField] private SpaceStation _spaceStation;
-    [SerializeField] private TimeControl _timeControl;
 
     private void OnEnable()
     {
         CanvasGroup = GetComponent<CanvasGroup>();
-        ClickSound = FindAnyObjectByType<ClickAudioSource>().GetComponent<AudioSource>();
         TurnOff();
         _pauseButton.onClick.AddListener(StopGame);
     }
@@ -23,8 +21,8 @@ public class InGamePanel : Panel
 
     private void StopGame()
     {
-        ClickSound.Play();
-        _timeControl.StopTime();
+        ClickSoundSource.Play();
+        Time.timeScale = 0;
         TurnOff();
         _pausePanel.TurnOn();
     }

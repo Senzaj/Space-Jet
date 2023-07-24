@@ -10,13 +10,11 @@ public class SpaceFighterMover : MonoBehaviour
     [SerializeField] private float _endRotationValue;
     [SerializeField] private AudioSource _flyingSound;
     [SerializeField] private AudioSource _turnSound;
-
-    private SpaceStation _station;
+    [SerializeField] private SpaceStation _station;
 
     private void OnEnable()
     {
         transform.position = _playerEnd.position;
-        _station = FindFirstObjectByType<SpaceStation>();
         _station.Moved += Rotate;
     }
 

@@ -80,7 +80,7 @@ public class LevelButton : MonoBehaviour
         {
             _progressFlags.ChangeFirstFlag();
             PlayerPrefs.SetInt(GetLevelName(), 1);
-            _playersBank.GetCoin();
+            _playersBank.AddCoin();
 
             int levelIndex = _data.LevelIndex;
             PlayerPrefs.SetInt(PlayerPrefsVariables.NumberOfCompletedLevels, ++levelIndex);
@@ -104,7 +104,7 @@ public class LevelButton : MonoBehaviour
     private void LevelFullyComplete()
     {
         _progressFlags.ChangeSecondFlag();
-        _playersBank.GetCoin();
+        _playersBank.AddCoin();
         PlayerPrefs.SetInt(GetLevelName(), 2);
     }
 }

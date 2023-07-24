@@ -13,7 +13,6 @@ public class Shop : Panel
     private void OnEnable()
     {
         CanvasGroup = GetComponent<CanvasGroup>();
-        ClickSound = FindAnyObjectByType<ClickAudioSource>().GetComponent<AudioSource>();
         TurnOff();
         _closeButton.onClick.AddListener(OpenMainMenu);
 
@@ -34,7 +33,7 @@ public class Shop : Panel
 
     private void OpenMainMenu()
     {
-        ClickSound.Play();
+        ClickSoundSource.Play();
         TurnOff();
         _mainMenu.TurnOn();
     }

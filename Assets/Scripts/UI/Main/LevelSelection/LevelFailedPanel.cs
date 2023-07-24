@@ -13,7 +13,6 @@ public class LevelFailedPanel : Panel
     private void OnEnable()
     {
         CanvasGroup = GetComponent<CanvasGroup>();
-        ClickSound = FindAnyObjectByType<ClickAudioSource>().GetComponent<AudioSource>();
         TurnOff();
         _levelControl.LevelFailed += OpenPanel;
         _backToMenuButton.onClick.AddListener(OpenMainMenu);
@@ -37,14 +36,14 @@ public class LevelFailedPanel : Panel
 
     private void OpenMainMenu()
     {
-        ClickSound.Play();
+        ClickSoundSource.Play();
         TurnOff();
         _mainMenu.TurnOn();
     }
 
     private void RestartLevel()
     {
-        ClickSound.Play();
+        ClickSoundSource.Play();
         TurnOff();
     }
 }

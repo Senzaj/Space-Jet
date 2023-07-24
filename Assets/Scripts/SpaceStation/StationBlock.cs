@@ -26,7 +26,7 @@ public class StationBlock : MonoBehaviour
     {
         _destroyerPosition = FindFirstObjectByType<Destroyer>().transform;
         _station = FindFirstObjectByType<SpaceStation>();
-        _audioSource = FindAnyObjectByType<StationBlockAudioSource>().GetComponent<AudioSource>();
+        _audioSource = FindFirstObjectByType<StationBlockAudioSource>().GetComponent<AudioSource>();
         _energyShields = new List<EnergyShield>();
         _currentHP = _maxHP;
 

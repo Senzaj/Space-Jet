@@ -14,16 +14,15 @@ public class FighterButton : MonoBehaviour
     [SerializeField] private Image _checkMarkIcon;
     [SerializeField] private Player _player;
     [SerializeField] private PlayersPiggyBank _playersBank;
+    [SerializeField] private AudioSource _clickSound;
 
     public int Index => _index;
 
     private Button _button;
-    private AudioSource _clickSound;
 
     private void OnEnable()
     {
         _button = GetComponent<Button>();
-        _clickSound = FindFirstObjectByType<ClickAudioSource>().GetComponent<AudioSource>();
         _priceField.text = _price.ToString();
 
         _button.onClick.AddListener(TryBuyFighter);

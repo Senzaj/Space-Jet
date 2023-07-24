@@ -24,7 +24,6 @@ public class LevelSelection : Panel
 
         _buttons = new List<LevelButton>();
         CanvasGroup = GetComponent<CanvasGroup>();
-        ClickSound = FindAnyObjectByType<ClickAudioSource>().GetComponent<AudioSource>();
         TurnOff();
 
         if (PlayerPrefs.HasKey(PlayerPrefsVariables.NumberOfCompletedLevels))
@@ -60,7 +59,7 @@ public class LevelSelection : Panel
 
     private void GoToMenu()
     {
-        ClickSound.Play();
+        ClickSoundSource.Play();
         TurnOff();
         _menu.TurnOn();
     }

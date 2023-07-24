@@ -18,7 +18,7 @@ public class PlayersPiggyBank : MonoBehaviour
         ChangedNumberOfCoin.Invoke(_currentNumberOfCoin);
     }
 
-    public void GetCoin()
+    public void AddCoin()
     {
         _currentNumberOfCoin++;
         ChangedNumberOfCoin.Invoke(_currentNumberOfCoin);

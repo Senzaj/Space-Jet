@@ -5,9 +5,9 @@ public abstract class ObjectPool : MonoBehaviour
 {
     [SerializeField] private GameObject _template;
     [SerializeField] private int _poolCapacity;
+    [SerializeField] private Player _player;
 
     private List<GameObject> _pool;
-    private Player _player;
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public abstract class ObjectPool : MonoBehaviour
 
     private void OnEnable()
     {
-        _player = FindFirstObjectByType<Player>();
+        //_player = FindFirstObjectByType<Player>();
         _player.Lost += DisableObjects;
         _player.Won += DisableObjects;
     }
