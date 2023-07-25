@@ -10,6 +10,7 @@ public class LevelControl : MonoBehaviour
     [SerializeField] private InGamePanel _gamePanel;
     [SerializeField] private LevelButton _nextLevelButton;
     [SerializeField] private LevelButton _restartLevelButton;
+    [SerializeField] private TutorialPanel _tutorial;
 
     public event UnityAction LevelStarted;
     public event UnityAction<LevelData, bool> LevelComplete;
@@ -46,6 +47,9 @@ public class LevelControl : MonoBehaviour
         _station.SetParams(data.StationBlocksCount, data.RotationSpeed , data.MinShieldsCount, data.MaxShieldsCount);
         LevelStarted?.Invoke();
         _gamePanel.TurnOn();
+
+        if (PlayerPrefs.GetInt(PlayerPrefsVariables.Tutorial2WasShown) != 1)
+            TryShowTutorial();
     }
 
     private void OnPlayerWon( bool isPlayerDamaged)
@@ -58,5 +62,20 @@ public class LevelControl : MonoBehaviour
     {
         LevelFailed?.Invoke(_currentLevel);
         _gamePanel.TurnOff();
+    }
+
+    private void TryShowTutorial()
+    {
+        if (_currentLevel.LevelIndex == _tutorial.LevelIndexForTutorial1 && PlayerPrefs.GetInt(PlayerPrefsVariables.Tutorial1WasShown) != 1)
+        {
+            _tutorial.ShowTutorial1();
+            PlayerPrefs.SetInt(PlayerPrefsVariables.Tutorial1WasShown, 1);
+        }
+
+        if (_currentLevel.LevelIndex == _tutorial.LevelIndexForTutorial2 && PlayerPrefs.GetInt(PlayerPrefsVariables.Tutorial2WasShown) != 1)
+        {
+            _tutorial.ShowTutorial2();
+            PlayerPrefs.SetInt(PlayerPrefsVariables.Tutorial2WasShown, 1);
+        }
     }
 }

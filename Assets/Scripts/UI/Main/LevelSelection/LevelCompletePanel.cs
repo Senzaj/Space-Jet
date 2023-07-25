@@ -17,6 +17,7 @@ public class LevelCompletePanel : Panel
     [SerializeField] private AudioClip _victorySound;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private RewardedVideoButton _videoButton;
+    [SerializeField] private Yandex _yandex;
 
     private LevelData _currentLevelData;
 
@@ -71,7 +72,7 @@ public class LevelCompletePanel : Panel
     private void OpenMainMenu()
     {
         ClickSoundSource.Play();
-        //_yandex.ShowInterstitial();
+        _yandex.ShowInterstitial();
         TurnOff();
         _mainMenu.TurnOn();
     }
@@ -79,7 +80,7 @@ public class LevelCompletePanel : Panel
     private void StartNextLevel()
     {
         ClickSoundSource.Play();
-        //_yandex.ShowInterstitial();
+        _yandex.ShowInterstitial();
         TurnOff();
     }
 
