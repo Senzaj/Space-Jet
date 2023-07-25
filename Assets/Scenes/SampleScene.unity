@@ -15682,6 +15682,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _videoImage: {fileID: 496898336}
   _yandex: {fileID: 2066110989}
+  _startColor: {r: 1, g: 1, b: 1, a: 1}
+  _endColor: {r: 0.105882354, g: 0.90588236, b: 1, a: 1}
+  _blinkingDuration: 1
 --- !u!1 &1306612933
 GameObject:
   m_ObjectHideFlags: 0
