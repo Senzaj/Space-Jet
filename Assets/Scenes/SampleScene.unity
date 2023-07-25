@@ -25532,6 +25532,9 @@ MonoBehaviour:
   _moveSpeed: 1.5
   _appearingAndDisappearingSpeed: 1.2
   _blockTemplate: {fileID: 9079480900796377196, guid: e65db042fc4b59446a14773c04072966, type: 3}
+  _destroyer: {fileID: 489002980}
+  _stationBlockAudioSource: {fileID: 1236959262}
+  _blastPool: {fileID: 273051353}
   _distanceBetweenBlocks: 21
   _levelControl: {fileID: 1508910402}
   _stationStart: {fileID: 85113808}

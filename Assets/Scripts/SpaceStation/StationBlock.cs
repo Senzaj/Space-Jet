@@ -21,12 +21,10 @@ public class StationBlock : MonoBehaviour
     private SpaceStation _station;
     private Transform _destroyerPosition;
     private AudioSource _audioSource;
+    private BlastPool _blastPool;
 
     private void OnEnable()
     {
-        _destroyerPosition = FindFirstObjectByType<Destroyer>().transform;
-        _station = FindFirstObjectByType<SpaceStation>();
-        _audioSource = FindFirstObjectByType<StationBlockAudioSource>().GetComponent<AudioSource>();
         _energyShields = new List<EnergyShield>();
         _currentHP = _maxHP;
 
@@ -38,8 +36,6 @@ public class StationBlock : MonoBehaviour
                 child.gameObject.SetActive(false);
             }
         }
-
-        TurnOnShields();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -57,6 +53,16 @@ public class StationBlock : MonoBehaviour
             _audioSource.PlayOneShot(_hitSound);
             TryToBeDestroyed();
         }
+    }
+
+    public void SetComponents(Destroyer destroyer, SpaceStation spaceStation, StationBlockAudioSource stationBlockAudioSource, BlastPool pool)
+    {
+        _destroyerPosition = destroyer.transform;
+        _station = spaceStation;
+        _audioSource = stationBlockAudioSource.GetComponent<AudioSource>();
+        _blastPool = pool;
+
+        TurnOnShields();
     }
 
     private void TryToBeDestroyed()
@@ -79,6 +85,9 @@ public class StationBlock : MonoBehaviour
 
     private void TurnOnShields()
     {
+        foreach (EnergyShield shield in _energyShields)
+            shield.SetComponents(_blastPool, _audioSource);
+
         _energyShields = _energyShields.OrderBy(x => Random.Range(0, _energyShields.Count)).ToList();
         int turnedOnShieldsCount = Random.Range(_station.MinShieldCount, _station.MaxShieldCount);
 

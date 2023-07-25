@@ -10,8 +10,8 @@ public class Blast : MonoBehaviour
 
     private void OnEnable()
     {
-        _target = FindFirstObjectByType<Player>().transform;
-        transform.DOMove(_target.position, _moveSpeed);
+        if (_target != null)
+            MoveToTarget();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -21,5 +21,15 @@ public class Blast : MonoBehaviour
             player.TakeDamage(_damage);
             gameObject.SetActive(false);
         }
+    }
+
+    public void SetTarget(Player player)
+    {
+        _target = player.transform;
+    }
+
+    private void MoveToTarget()
+    {
+        transform.DOMove(_target.position, _moveSpeed);
     }
 }

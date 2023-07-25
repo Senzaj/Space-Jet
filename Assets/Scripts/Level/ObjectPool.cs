@@ -7,30 +7,32 @@ public abstract class ObjectPool : MonoBehaviour
     [SerializeField] private int _poolCapacity;
     [SerializeField] private Player _player;
 
-    private List<GameObject> _pool;
+    protected GameObject Template => _template;
+    protected int PoolCapacity => _poolCapacity;
+    protected Player Player => _player;
+    protected List<GameObject> Pool;
 
     private void Awake()
     {
-        _pool = new List<GameObject>();
+        Pool = new List<GameObject>();
 
         for (int i = 0; i < _poolCapacity; i++)
         {
             GameObject spawned = Instantiate(_template, transform.position,Quaternion.identity ,transform);
             spawned.SetActive(false);
-            _pool.Add(spawned);
+            Pool.Add(spawned);
         }
     }
 
     private void OnEnable()
     {
-        //_player = FindFirstObjectByType<Player>();
         _player.Lost += DisableObjects;
         _player.Won += DisableObjects;
     }
 
     public GameObject Spawn(Vector3 spawnPoint)
     {
-        foreach (GameObject obj in _pool)
+        foreach (GameObject obj in Pool)
         {
             if (obj.activeSelf == false)
             {
@@ -46,13 +48,13 @@ public abstract class ObjectPool : MonoBehaviour
 
     private void DisableObjects(bool isPlayerDamaged)
     {
-        foreach(GameObject obj in _pool)
+        foreach(GameObject obj in Pool)
             obj.SetActive(false);
     }
 
     private void DisableObjects()
     {
-        foreach (GameObject obj in _pool)
+        foreach (GameObject obj in Pool)
             obj.SetActive(false);
     }
 }

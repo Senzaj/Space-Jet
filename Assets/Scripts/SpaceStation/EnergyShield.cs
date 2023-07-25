@@ -8,10 +8,10 @@ public class EnergyShield : MonoBehaviour
     private ObjectPool _blastPool;
     private AudioSource _audioSource;
 
-    private void Start()
+    public void SetComponents(BlastPool pool, AudioSource stationBlockAudioSource)
     {
-        _blastPool = FindObjectOfType<BlastPool>();
-        _audioSource = FindFirstObjectByType<StationBlockAudioSource>().GetComponent<AudioSource>();
+        _blastPool = pool;
+        _audioSource = stationBlockAudioSource;
     }
 
     public void TurnOff(float speed)

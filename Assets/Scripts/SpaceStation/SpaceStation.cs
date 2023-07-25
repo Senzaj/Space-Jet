@@ -8,6 +8,9 @@ public class SpaceStation : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _appearingAndDisappearingSpeed;
     [SerializeField] private GameObject _blockTemplate;
+    [SerializeField] private Destroyer _destroyer;
+    [SerializeField] private StationBlockAudioSource _stationBlockAudioSource;
+    [SerializeField] private BlastPool _blastPool;
     [SerializeField] private float _distanceBetweenBlocks;
     [SerializeField] private LevelControl _levelControl;
     [SerializeField] private Transform _stationStart;
@@ -72,6 +75,7 @@ public class SpaceStation : MonoBehaviour
             _spawnPosition.x += _distanceBetweenBlocks;
 
             StationBlock spawnedBlock = spawnedObject.GetComponentInChildren<StationBlock>();
+            spawnedBlock.SetComponents(_destroyer, this, _stationBlockAudioSource, _blastPool);
             spawnedBlock.Destroyed += Move;
             _blocks.Add(spawnedBlock);
         }
