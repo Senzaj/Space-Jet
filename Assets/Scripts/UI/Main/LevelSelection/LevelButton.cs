@@ -20,8 +20,6 @@ public class LevelButton : MonoBehaviour
         _button = GetComponent<Button>();
         _index = GetComponentInChildren<TMP_Text>();
         _progressFlags = GetComponentInChildren<ProgressFlags>();
-        _playersBank = FindFirstObjectByType<PlayersPiggyBank>();
-        _clickSound = FindFirstObjectByType<ClickAudioSource>().GetComponent<AudioSource>();
         _button.onClick.AddListener(Clicked);
     }
 
@@ -48,6 +46,12 @@ public class LevelButton : MonoBehaviour
     private void OnDisable()
     {
         _button.onClick.RemoveListener(Clicked);
+    }
+
+    public void SetComponents(PlayersPiggyBank bank, AudioSource audioSource)
+    {
+        _playersBank = bank;
+        _clickSound = audioSource;
     }
 
     public void SetLevelData(LevelData data)

@@ -11,6 +11,7 @@ public class LevelSelection : Panel
     [SerializeField] private MainMenu _menu;
     [SerializeField] private Button _closeButton;
     [SerializeField] private int _minAvailableLevelIndex;
+    [SerializeField] private PlayersPiggyBank _bank;
 
     public int LevelCount => _data.Count;
 
@@ -34,6 +35,7 @@ public class LevelSelection : Panel
             LevelButton button = Instantiate(_buttonTemplate, _content.transform);
             _buttons.Add(button);
             button.SetLevelData(data);
+            button.SetComponents(_bank, ClickSoundSource);
             button.Disable();
 
             if (data.LevelIndex <= _minAvailableLevelIndex)

@@ -5996,6 +5996,7 @@ MonoBehaviour:
   _menu: {fileID: 713017564}
   _closeButton: {fileID: 384630316}
   _minAvailableLevelIndex: 1
+  _bank: {fileID: 919132147824574494}
 --- !u!225 &819634286
 CanvasGroup:
   m_ObjectHideFlags: 0

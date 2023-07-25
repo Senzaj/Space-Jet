@@ -8,17 +8,6 @@ public class EnergyShield : MonoBehaviour
     private ObjectPool _blastPool;
     private AudioSource _audioSource;
 
-    public void SetComponents(BlastPool pool, AudioSource stationBlockAudioSource)
-    {
-        _blastPool = pool;
-        _audioSource = stationBlockAudioSource;
-    }
-
-    public void TurnOff(float speed)
-    {
-        transform.DOScale(0,speed);
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent(out Torpedo torpedo))
@@ -30,5 +19,15 @@ public class EnergyShield : MonoBehaviour
                 break;
             }
         }
+    }
+    public void SetComponents(BlastPool pool, AudioSource stationBlockAudioSource)
+    {
+        _blastPool = pool;
+        _audioSource = stationBlockAudioSource;
+    }
+
+    public void TurnOff(float speed)
+    {
+        transform.DOScale(0,speed);
     }
 }
