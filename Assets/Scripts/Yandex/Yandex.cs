@@ -13,11 +13,13 @@ namespace Agava.YandexGames.Samples
 {
     public class Yandex : MonoBehaviour
     {
+        [SerializeField] private Leaderlist _leaderlist;
         [SerializeField] private PlayersPiggyBank _playersPiggyBank;
         [SerializeField] private int Reward = 2;
 
         public Action AdOpened;
         public Action<bool> AdClosed;
+        public Action Initialized;
         private string _currentLanguage;
 
         private void Awake()
@@ -90,15 +92,36 @@ namespace Agava.YandexGames.Samples
             StickyAd.Hide();
         }
 
-        public void GetEnvironment()
+        public void SetLeaderboardScore(string boardName,int score)
         {
-            Debug.Log($"Environment = {JsonUtility.ToJson(YandexGamesSdk.Environment)}");
+            Leaderboard.SetScore(boardName, score);
+        }
+
+        public void GetLeaderboardEntries(string boardName)
+        {
+            Leaderboard.GetEntries(boardName, (result) =>
+            {
+                foreach (var entry in result.entries)
+                    _leaderlist.AddResult(entry.player.publicName, entry.score);
+            });
+        }
+
+        public void GetLeaderboardPlayerEntry(string boardName)
+        {
+            Leaderboard.GetPlayerEntry(boardName, (result) =>
+            {
+                if (result == null)
+                    Debug.Log("Player is not present in the leaderboard.");
+                else
+                    Debug.Log($"My rank = {result.rank}, score = {result.score}");
+            });
         }
 
         private void OnInitialized()
         {
             SetLanguage();
             ShowStickyAd();
+            Initialized.Invoke();
         }
 
         private void OnRewarded()

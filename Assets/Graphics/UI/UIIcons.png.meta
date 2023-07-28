@@ -380,7 +380,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -401,7 +401,7 @@ TextureImporter:
         width: 96
         height: 96
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -409,6 +409,27 @@ TextureImporter:
       bones: []
       spriteID: 196f5891f6a16ee449d03e72c2be5f2c
       internalID: 438230314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pomoika
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 132
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f36bbfc436907974f852c7751ba67a92
+      internalID: -1663050846
       vertices: []
       indices: 
       edges: []
@@ -432,6 +453,7 @@ TextureImporter:
       Next: -252838082
       Pause: 1227441793
       Play: 1046946987
+      Pomoika: -1663050846
       Restart: 971098802
       Settings: 1848518991
       Shop: 1685425386

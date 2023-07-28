@@ -5,6 +5,8 @@ public class MainMenu : Panel
 {
     [SerializeField] private Button _playButton;
     [SerializeField] private Button _ShopButton;
+    [SerializeField] private Button _LeaderboardButton;
+    [SerializeField] private Leaderlist _Leaderboard;
     [SerializeField] private Panel _levelSelection;
     [SerializeField] private Panel _shop;
 
@@ -14,12 +16,14 @@ public class MainMenu : Panel
         TurnOn();
         _playButton.onClick.AddListener(TurnOnLevelSelection);
         _ShopButton.onClick.AddListener(TurnOnShop);
+        _LeaderboardButton.onClick.AddListener(TurnOnLeaderBoard);
     }
 
     private void OnDisable()
     {
         _playButton.onClick.RemoveListener(TurnOnLevelSelection);
         _ShopButton.onClick.RemoveListener(TurnOnShop);
+        _LeaderboardButton.onClick.RemoveListener(TurnOnLeaderBoard);
     }
 
     private void TurnOnLevelSelection()
@@ -34,5 +38,12 @@ public class MainMenu : Panel
         ClickSoundSource.Play();
         TurnOff();
         _shop.TurnOn();
+    }
+
+    private void TurnOnLeaderBoard()
+    {
+        ClickSoundSource.Play();
+        TurnOff();
+        _Leaderboard.TurnOn();
     }
 }

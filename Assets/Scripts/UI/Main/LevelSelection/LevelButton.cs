@@ -6,12 +6,13 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))] 
 public class LevelButton : MonoBehaviour
 {
+    [SerializeField] private PlayersPiggyBank _playersBank;
+    [SerializeField] private AudioSource _clickSound;
+
     private Button _button;
     private TMP_Text _index;
     private LevelData _data;
     private ProgressFlags _progressFlags;
-    private PlayersPiggyBank _playersBank;
-    private AudioSource _clickSound;
 
     public event UnityAction<LevelData> LevelSelected;
 

@@ -6,14 +6,14 @@ public abstract class Panel : MonoBehaviour
     [SerializeField] protected AudioSource ClickSoundSource;
     protected CanvasGroup CanvasGroup;
 
-    public void TurnOn()
+    public virtual void TurnOn()
     {
         CanvasGroup.alpha = 1;
         CanvasGroup.interactable = true;
         CanvasGroup.blocksRaycasts = true;
     }
 
-    public void TurnOff()
+    public virtual void TurnOff()
     {
         CanvasGroup.alpha = 0;
         CanvasGroup.interactable = false;

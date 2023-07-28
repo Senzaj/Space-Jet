@@ -7,4 +7,5 @@ public class PlayerPrefsVariables
     public const string IsMusicOn = nameof(IsMusicOn);
     public const string Tutorial1WasShown = nameof(Tutorial1WasShown);
     public const string Tutorial2WasShown = nameof(Tutorial2WasShown);
+    public const string Score = nameof(Score);
 }
