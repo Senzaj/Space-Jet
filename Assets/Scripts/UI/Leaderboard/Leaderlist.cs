@@ -12,11 +12,15 @@ public class Leaderlist : Panel
     [SerializeField] private GameObject _content;
     [SerializeField] private Button _closeButton;
     [SerializeField] private MainMenu _mainMenu;
+    [SerializeField] private int _minPlayersCount = 1;
+    [SerializeField] private int _maxPlayersCount;
 
+    public int MinPlayersCount => _minPlayersCount;
+    public int MaxPlayersCount => _maxPlayersCount;
     public string LeaderboardName => _leaderboardName;
 
     private List<Result> _results = new();
-    //private bool _isInitialized = false;
+    private bool _isInitialized = false;
 
     private void OnEnable()
     {
@@ -39,7 +43,7 @@ public class Leaderlist : Panel
         CanvasGroup.interactable = true;
         CanvasGroup.blocksRaycasts = true;
 
-        //if (_isInitialized)
+        if (_isInitialized)
             _yandex.GetLeaderboardEntries(LeaderboardName);
     }
 
@@ -73,7 +77,7 @@ public class Leaderlist : Panel
 
     private void OnInitialized()
     {
-        //_isInitialized = true;
+        _isInitialized = true;
     }
 
     private void Close()

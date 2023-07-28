@@ -8870,6 +8870,8 @@ MonoBehaviour:
   _content: {fileID: 1543821321}
   _closeButton: {fileID: 1036003708}
   _mainMenu: {fileID: 713017564}
+  _minPlayersCount: 1
+  _maxPlayersCount: 15
 --- !u!1 &1038371371
 GameObject:
   m_ObjectHideFlags: 0

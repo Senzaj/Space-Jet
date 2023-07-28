@@ -72,7 +72,7 @@ public class LevelCompletePanel : Panel
     private void OpenMainMenu()
     {
         ClickSoundSource.Play();
-        //_yandex.ShowInterstitial();
+        _yandex.ShowInterstitial();
         TurnOff();
         _mainMenu.TurnOn();
     }
@@ -80,7 +80,7 @@ public class LevelCompletePanel : Panel
     private void StartNextLevel()
     {
         ClickSoundSource.Play();
-        //_yandex.ShowInterstitial();
+        _yandex.ShowInterstitial();
         TurnOff();
     }
 

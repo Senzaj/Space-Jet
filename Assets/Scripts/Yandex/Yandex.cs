@@ -101,8 +101,11 @@ namespace Agava.YandexGames.Samples
         {
             Leaderboard.GetEntries(boardName, (result) =>
             {
-                foreach (var entry in result.entries)
-                    _leaderlist.AddResult(entry.player.publicName, entry.score);
+                var results = result.entries.Length;
+                results = Mathf.Clamp(results, _leaderlist.MinPlayersCount, _leaderlist.MaxPlayersCount);
+
+                for (var i = 0; i < results; i++)
+                    _leaderlist.AddResult(result.entries[i].player.publicName, result.entries[i].score);
             });
         }
 
