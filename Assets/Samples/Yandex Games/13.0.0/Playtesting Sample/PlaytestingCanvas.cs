@@ -72,7 +72,7 @@ namespace Agava.YandexGames.Samples
             PlayerAccount.Authorize();
         }
 
-        public void OnRequestPersonalProfileDataPermissionButtonClick()
+        public void RequestPersonalProfileDataPermission()
         {
             PlayerAccount.RequestPersonalProfileDataPermission();
         }

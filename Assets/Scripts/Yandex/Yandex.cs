@@ -92,6 +92,16 @@ namespace Agava.YandexGames.Samples
             StickyAd.Hide();
         }
 
+        public void OnAuthorizeButtonClick()
+        {
+            PlayerAccount.Authorize();
+        }
+
+        public void RequestPersonalProfileDataPermission()
+        {
+            PlayerAccount.RequestPersonalProfileDataPermission();
+        }
+
         public void SetLeaderboardScore(string boardName,int score)
         {
             Leaderboard.SetScore(boardName, score);

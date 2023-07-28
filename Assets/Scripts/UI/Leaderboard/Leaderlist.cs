@@ -1,3 +1,4 @@
+using Agava.YandexGames;
 using Agava.YandexGames.Samples;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ public class Leaderlist : Panel
     [SerializeField] private string _leaderboardName = "Leaderboard";
     [SerializeField] private Yandex _yandex;
     [SerializeField] private Result _resultTemplate;
+    [SerializeField] private InGamePanel _inGamePanel;
     [SerializeField] private GameObject _content;
     [SerializeField] private Button _closeButton;
     [SerializeField] private MainMenu _mainMenu;
@@ -44,7 +46,13 @@ public class Leaderlist : Panel
         CanvasGroup.blocksRaycasts = true;
 
         if (_isInitialized)
+        {
+            if (PlayerAccount.HasPersonalProfileDataPermission == false)
+                _yandex.RequestPersonalProfileDataPermission();
+
             _yandex.GetLeaderboardEntries(LeaderboardName);
+        }
+
     }
 
     public override void TurnOff()
@@ -84,6 +92,13 @@ public class Leaderlist : Panel
     {
         ClickSoundSource.Play();
         TurnOff();
-        _mainMenu.TurnOn();
+
+        if (Time.timeScale == 0)
+        {
+            _inGamePanel.TurnOn();
+            Time.timeScale = 1;
+        }
+        else
+            _mainMenu.TurnOn();
     }
 }

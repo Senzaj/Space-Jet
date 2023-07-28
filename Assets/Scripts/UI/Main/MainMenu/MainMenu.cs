@@ -1,12 +1,14 @@
+using Agava.YandexGames;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMenu : Panel
 {
     [SerializeField] private Button _playButton;
-    [SerializeField] private Button _ShopButton;
+    [SerializeField] private Button _shopButton;
     [SerializeField] private Button _LeaderboardButton;
     [SerializeField] private Leaderlist _Leaderboard;
+    [SerializeField] private AuthorizationPanel _authorizationPanel;
     [SerializeField] private Panel _levelSelection;
     [SerializeField] private Panel _shop;
 
@@ -15,14 +17,14 @@ public class MainMenu : Panel
         CanvasGroup = GetComponent<CanvasGroup>();
         TurnOn();
         _playButton.onClick.AddListener(TurnOnLevelSelection);
-        _ShopButton.onClick.AddListener(TurnOnShop);
+        _shopButton.onClick.AddListener(TurnOnShop);
         _LeaderboardButton.onClick.AddListener(TurnOnLeaderBoard);
     }
 
     private void OnDisable()
     {
         _playButton.onClick.RemoveListener(TurnOnLevelSelection);
-        _ShopButton.onClick.RemoveListener(TurnOnShop);
+        _shopButton.onClick.RemoveListener(TurnOnShop);
         _LeaderboardButton.onClick.RemoveListener(TurnOnLeaderBoard);
     }
 
@@ -44,6 +46,10 @@ public class MainMenu : Panel
     {
         ClickSoundSource.Play();
         TurnOff();
-        _Leaderboard.TurnOn();
+
+        if (PlayerAccount.IsAuthorized)
+            _Leaderboard.TurnOn();
+        else
+            _authorizationPanel.TurnOn();
     }
 }
