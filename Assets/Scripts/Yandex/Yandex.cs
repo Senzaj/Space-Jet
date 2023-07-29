@@ -20,7 +20,10 @@ namespace Agava.YandexGames.Samples
         public Action AdOpened;
         public Action<bool> AdClosed;
         public Action Initialized;
+        private bool _isInitialized = false;
         private string _currentLanguage;
+
+        public bool IsInitialized => _isInitialized;
 
         private void Awake()
         {
@@ -132,6 +135,7 @@ namespace Agava.YandexGames.Samples
 
         private void OnInitialized()
         {
+            _isInitialized = true;
             SetLanguage();
             ShowStickyAd();
             Initialized.Invoke();

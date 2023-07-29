@@ -5968,6 +5968,7 @@ MonoBehaviour:
   _authorizationPanel: {fileID: 1632713850}
   _levelSelection: {fileID: 819634285}
   _shop: {fileID: 910240833}
+  _yandex: {fileID: 2066110989}
 --- !u!225 &713017565
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -8632,7 +8633,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980646962}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -15649,7 +15650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5afb8bfe8dfbcb64ca971deee718490c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelIndex: 666
+  _levelIndex: 66
   _stationBlocksCount: 6
   _rotationSpeed: 50
   _minShieldsCount: 3

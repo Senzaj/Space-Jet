@@ -1,4 +1,5 @@
 using Agava.YandexGames;
+using Agava.YandexGames.Samples;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class MainMenu : Panel
     [SerializeField] private AuthorizationPanel _authorizationPanel;
     [SerializeField] private Panel _levelSelection;
     [SerializeField] private Panel _shop;
+    [SerializeField] private Yandex _yandex;
 
     private void OnEnable()
     {
@@ -45,11 +47,15 @@ public class MainMenu : Panel
     private void TurnOnLeaderBoard()
     {
         ClickSoundSource.Play();
-        TurnOff();
 
-        if (PlayerAccount.IsAuthorized)
-            _Leaderboard.TurnOn();
-        else
-            _authorizationPanel.TurnOn();
+        if (_yandex.IsInitialized)
+        {
+            TurnOff();
+
+            if (PlayerAccount.IsAuthorized)
+                _Leaderboard.TurnOn();
+            else
+                _authorizationPanel.TurnOn();
+        }
     }
 }
